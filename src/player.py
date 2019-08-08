@@ -3,9 +3,6 @@
 
 
 class Player:
-    def __init__(self, name, currentRoom):
+    def __init__(self, name, current_room):
         self.name = name
-        self.currentRoom = currentRoom
-
-    def __str__(self):
-        return self.currentRoom
+        self.current_room = current_room
