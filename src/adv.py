@@ -1,4 +1,5 @@
 from room import Room
+from player import Player
 
 # Declare all the rooms
 
@@ -39,8 +40,10 @@ room['treasure'].s_to = room['narrow']
 
 # Make a new player object that is currently in the 'outside' room.
 
+# print(player1)
+
+
 # Write a loop that:
-#
 # * Prints the current room name
 # * Prints the current description (the textwrap module might be useful here).
 # * Waits for user input and decides what to do.
@@ -49,3 +52,26 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+
+def try_dir(dir, current_room):
+    attribute = dir+'_to'
+    if hasattr(current_room, attribute):
+        return getattr(current_room, attribute)
+    else:
+        print('You may not go this way')
+        return current_room
+
+
+player = Player("john", room["outside"])
+while True:
+    current_room = player.current_room
+    cmd = input(">>> ")
+    if cmd in ("n", "e", "w", "s"):
+        player.current_room = try_dir(cmd, current_room)
+        print(
+            f"you are in {player.current_room.name}: {player.current_room.description}")
+    elif cmd == "q":
+        break
+    else:
+        print("yo mf, input valid characters")
